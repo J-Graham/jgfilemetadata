@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Backend Challenges | Free Code Camp</title>
+      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link href="/public/style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+      <div class="container hide">
+         <h1>Manage Node.js projects and npm packages using package.json</h1>
+         <h3>Part 1 of Free Code Camp Backend Challenges</h3>
+        <input type="file"/>
+        <input type="button" value="Submit"/>
+      </div>
+     <div class="show">
+       <span id="result"></span>       
+     </div>
+   </body>
+
+  <script type="text/javascript">
+  document.querySelector('input[type="button"]').onclick = function() { 
+  var input = document.querySelector('input[type="file"]')
+
+var data = new FormData()
+data.append('file', input.files[0])
+
+fetch('/getsize', {
+  method: 'POST',
+  body: data
+})  .then((resp) => resp.json()) // Transform the data into json
+    .then(function(data) {
+    document.querySelector(".hide").style.display = 'none';
+  console.log(data);
+    document.querySelector('#result').innerHTML = '{"size":' + data.size + '}';
+  })};
+  </script>
+</html>
